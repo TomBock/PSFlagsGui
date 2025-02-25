@@ -1,0 +1,12 @@
+name: PSFlagsGui
+version: '1.0.0'
+main: com.bocktom.flags.PSFlagsGui
+api-version: '1.21'
+depend:
+  - PlotSquared
+  - WorldEdit
+commands:
+  flags:
+    description: Open the flags gui
+    usage: /flags
+    permission: psflags.use

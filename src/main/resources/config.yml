@@ -1,0 +1,91 @@
+messages:
+  noplot: "§cKein Plot gefunden."
+  cmderror: "§cDer Befehl zum Setzen der Flag (%cmd%) konnte nicht ausgeführt werden."
+  gui:
+    title: "§6Plot Flags"
+
+flags:
+  - flag: "pvp"
+    cmd: "plot flag set pvp %value%"
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 4189
+      type: DIAMOND_SWORD
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: '{"text":"PvP","italic":false,"color":"red"}'
+        lore:
+          - '{"text":"Klicke mich um die Flag zu ändern.","color":"gray"}'
+  - flag: "beacon-effects"
+    cmd: "plot flag set beacon-effects %value%"
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 4189
+      type: BEACON
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: '{"text":"Beacon Effekte","italic":false,"color":"red"}'
+        lore:
+          - '{"text":"Klicke mich um die Flag zu ändern.","color":"gray"}'
+  - flag: "block-burn"
+    cmd: "plot flag set block-burn %value%"
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 4189
+      type: FIRE_CHARGE
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: '{"text":"Burning Blocks","italic":false,"color":"red"}'
+        lore:
+          - '{"text":"Klicke mich um die Flag zu ändern.","color":"gray"}'
+  - flag: "disable-physics"
+    cmd: "plot flag set disable-physics %value%"
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 4189
+      type: ANVIL
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: '{"text":"Disable Physics","italic":false,"color":"red"}'
+        lore:
+          - '{"text":"Klicke mich um die Flag zu ändern.","color":"gray"}'
+  - flag: "explosion"
+    cmd: "plot flag set explosion %value%"
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 4189
+      type: TNT
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: '{"text":"Explosion","italic":false,"color":"red"}'
+        lore:
+          - '{"text":"Klicke mich um die Flag zu ändern.","color":"gray"}'
+  - flag: "instabreak"
+    cmd: "plot flag set instabreak %value%"
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 4189
+      type: NETHERITE_PICKAXE
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: '{"text":"Instabreak","italic":false,"color":"red"}'
+        lore:
+          - '{"text":"Klicke mich um die Flag zu ändern.","color":"gray"}'
+  - flag: "pve"
+    cmd: "plot flag set pve %value%"
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 4189
+      type: CROSSBOW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: '{"text":"PvE","italic":false,"color":"red"}'
+        lore:
+          - '{"text":"Klicke mich um die Flag zu ändern.","color":"gray"}'
