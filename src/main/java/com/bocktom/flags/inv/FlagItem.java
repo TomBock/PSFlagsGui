@@ -30,7 +30,7 @@ public class FlagItem extends AbstractItem {
 
 	@Override
 	public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent inventoryClickEvent) {
-		boolean result = player.performCommand(cmd.replace("%value%", String.valueOf(!stateItem.state)));
+		boolean result = player.performCommand(cmd.replace("%value%", stateItem.getCmdValue()));
 		if(!result) {
 			player.sendMessage(MSG.get("cmderror", "%cmd%", cmd));
 		}

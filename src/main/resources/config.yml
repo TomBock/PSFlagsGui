@@ -77,15 +77,39 @@ flags:
         display-name: '{"text":"Instabreak","italic":false,"color":"red"}'
         lore:
           - '{"text":"Klicke mich um die Flag zu ändern.","color":"gray"}'
-  - flag: "pve"
-    cmd: "plot flag set pve %value%"
+  - flag: "time"
+    cmd: "plot flag set time %value%"
     item:
       ==: org.bukkit.inventory.ItemStack
       v: 4189
-      type: CROSSBOW
+      type: CLOCK
       meta:
         ==: ItemMeta
         meta-type: UNSPECIFIC
-        display-name: '{"text":"PvE","italic":false,"color":"red"}'
+        display-name: '{"text":"Uhrzeit","italic":false,"color":"red"}'
         lore:
           - '{"text":"Klicke mich um die Flag zu ändern.","color":"gray"}'
+    enabled:
+      displayname: "§eTag"
+      changecmd: "13000"
+    disabled:
+      displayname: "§eNacht"
+      changecmd: "1000"
+  - flag: "weather"
+    cmd: "plot flag set weather %value%"
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 4189
+      type: WIND_CHARGE
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: '{"text":"Wetter","italic":false,"color":"red"}'
+        lore:
+          - '{"text":"Klicke mich um die Flag zu ändern.","color":"gray"}'
+    enabled:
+      changecmd: "rain"
+      displayname: "§eKlar"
+    disabled:
+      changecmd: "clear"
+      displayname: "§eRegen"

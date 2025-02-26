@@ -1,18 +1,24 @@
 package com.bocktom.flags;
 
+import com.bocktom.flags.config.FlagConfig;
 import com.bocktom.flags.inv.*;
 import com.bocktom.flags.util.MSG;
 import com.plotsquared.core.plot.Plot;
+import com.plotsquared.core.plot.PlotWeather;
 import com.plotsquared.core.plot.flag.GlobalFlagContainer;
 import com.plotsquared.core.plot.flag.PlotFlag;
 import com.plotsquared.core.plot.flag.implementations.FlyFlag;
+import com.plotsquared.core.plot.flag.implementations.TimeFlag;
+import com.plotsquared.core.plot.flag.implementations.WeatherFlag;
 import com.plotsquared.core.plot.flag.types.BooleanFlag;
+import com.plotsquared.core.plot.flag.types.LongFlag;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.gui.PagedGui;
 import xyz.xenondevs.invui.gui.structure.Markers;
 import xyz.xenondevs.invui.item.Item;
+import xyz.xenondevs.invui.item.builder.ItemBuilder;
 import xyz.xenondevs.invui.window.Window;
 
 import java.util.ArrayList;
@@ -50,16 +56,8 @@ public class FlagsInventory {
 	}
 
 	private List<FlagConfig> getConfig() {
-		List<FlagConfig> flags = new ArrayList<>();
 		List<Map<?, ?>> list = PSFlagsGui.plugin.getConfig().getMapList("flags");
-		for (Map<?, ?> map : list) {
-			FlagConfig cfg = new FlagConfig();
-			cfg.flag = (String) map.get("flag");
-			cfg.cmd = (String) map.get("cmd");
-			cfg.item = (ItemStack) map.get("item");
-			flags.add(cfg);
-		}
-		return flags;
+		return FlagConfig.createList(list);
 	}
 
 	private static List<Item> getItems(Plot plot, List<FlagConfig> flags) {
@@ -80,9 +78,19 @@ public class FlagsInventory {
 			if(cfgFlag instanceof BooleanFlag<?> booleanFlag) {
 				couldRead = true;
 				state = plot.getFlag(booleanFlag);
+
+			} else if(cfgFlag instanceof TimeFlag timeFlag) {
+				couldRead = true;
+				long current = plot.getFlag(timeFlag);
+				state = current < 13000 || 23000 < current;
+
 			} else if(cfgFlag instanceof FlyFlag flyFlag) {
 				couldRead = true;
 				state = plot.getFlag(flyFlag) == FlyFlag.FlyStatus.ENABLED;
+
+			} else if (cfgFlag instanceof WeatherFlag weatherFlag) {
+				couldRead = true;
+				state = plot.getFlag(weatherFlag) == PlotWeather.CLEAR;
 			}
 
 			if(!couldRead) {
@@ -90,8 +98,7 @@ public class FlagsInventory {
 				continue;
 			}
 
-			// Green or Red Dye
-			StateItem stateItem = new StateItem(state);
+			StateItem stateItem = new StateItem(state, cfg.enabledCfg, cfg.disabledCfg);
 
 			// Flag
 			FlagItem item = new FlagItem(cfg.cmd, cfg.item, stateItem);
@@ -100,11 +107,5 @@ public class FlagsInventory {
 			items.add(stateItem);
 		}
 		return items;
-	}
-
-	public static class FlagConfig {
-		public String flag;
-		public String cmd;
-		public ItemStack item;
 	}
 }
