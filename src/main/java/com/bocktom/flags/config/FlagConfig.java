@@ -1,6 +1,8 @@
 package com.bocktom.flags.config;
 
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import xyz.xenondevs.invui.item.builder.ItemBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +19,20 @@ public class FlagConfig {
 	public FlagConfig(Map<?, ?> map) {
 		flag = (String) map.get("flag");
 		cmd = (String) map.get("cmd");
-		item = (ItemStack) map.get("item");
+		item = getItemStack(map);
 
 		if(map.containsKey("enabled"))
 			enabledCfg = new ValueConfig(map.get("enabled"));
 
 		if(map.containsKey("disabled"))
 			disabledCfg = new ValueConfig(map.get("disabled"));
+	}
+
+	private ItemStack getItemStack(Map<?, ?> map) {
+		return new ItemBuilder(Material.valueOf((String) map.get("material")))
+				.setDisplayName((String) map.get("displayname"))
+				.setLegacyLore((List<String>) map.get("lore"))
+				.get();
 	}
 
 	public static class ValueConfig {

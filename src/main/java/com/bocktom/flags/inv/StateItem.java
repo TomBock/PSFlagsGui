@@ -40,7 +40,7 @@ public class StateItem extends AbstractItem {
 		}
 	}
 
-	public String getCmdValue() {
+	public String getCmdValue(boolean state) {
 		return state ? enabledCmd : disabledCmd;
 	}
 
