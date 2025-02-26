@@ -74,15 +74,24 @@ public class FlagsInventory {
 				continue;
 			}
 
-			if(!(cfgFlag instanceof BooleanFlag<?> booleanFlag)) {
-				PSFlagsGui.plugin.getLogger().warning("Flag is not a true/false flag: " + cfg.flag);
+			boolean couldRead = false;
+			boolean state = false;
+
+			if(cfgFlag instanceof BooleanFlag<?> booleanFlag) {
+				couldRead = true;
+				state = plot.getFlag(booleanFlag);
+			} else if(cfgFlag instanceof FlyFlag flyFlag) {
+				couldRead = true;
+				state = plot.getFlag(flyFlag) == FlyFlag.FlyStatus.ENABLED;
+			}
+
+			if(!couldRead) {
+				PSFlagsGui.plugin.getLogger().warning("Flag not supported: " + cfg.flag);
 				continue;
 			}
 
-			boolean value = plot.getFlag(booleanFlag);
-
 			// Green or Red Dye
-			StateItem stateItem = new StateItem(value);
+			StateItem stateItem = new StateItem(state);
 
 			// Flag
 			FlagItem item = new FlagItem(cfg.cmd, cfg.item, stateItem);
